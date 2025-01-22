@@ -81,9 +81,10 @@ std::string Util::WstringToString(std::wstring wstr)
     }
     catch (std::range_error)
     {
-        std::stringstream s;
-        s << wstr.c_str();
-        return s.str();
+        std::wstringstream s;
+        
+        s << wstr;
+        return WstringToString(s.str());
     }
 }
 
