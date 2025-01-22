@@ -16,12 +16,12 @@ std::vector<const char*> nodraw_materials = {
     "particle/smoke_multi1/smoke_01"
 };
 
-void Hooks::Paint(void* thisptr, PaintMode_t mode)
+int Hooks::Paint(void* thisptr, PaintMode_t mode)
 {
-    engineVGuiVMT->GetOriginalMethod<PaintFn>(15)(thisptr, mode);
+    int ret = engineVGuiVMT->GetOriginalMethod<PaintFn>(15)(thisptr, mode);
 
     if (engine->IsTakingScreenshot())
-        return;
+        return ret;
 
     if (mode & PAINT_UIPANELS)
     {
@@ -52,4 +52,6 @@ void Hooks::Paint(void* thisptr, PaintMode_t mode)
         counter %= 200;
         */
     }
+
+    return ret;
 }
