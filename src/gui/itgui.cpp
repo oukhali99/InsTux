@@ -34,10 +34,13 @@ void SwapWindowHook(SDL_Window* window)
     WinMain::RenderWindow();
     ImGui::Render();
 
-    static int counter = 0;
-    if (counter == 0 && inputSystem->IsButtonDown(ButtonCode_t::KEY_INSERT))
-        WinMain::showWindow = true;
-    counter = (counter + 1) % 20;
+    static bool pressedLastTime = false;
+    if (inputSystem->IsButtonDown(ButtonCode_t::KEY_INSERT)) {
+        if (!pressedLastTime)
+            WinMain::showWindow = !WinMain::showWindow;
+        pressedLastTime = true;
+    }
+    else pressedLastTime = false;
 
     // Swap back to the game context.
     SDL_GL_MakeCurrent(window, original_context);
