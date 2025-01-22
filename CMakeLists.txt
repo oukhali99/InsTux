@@ -45,7 +45,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
 
-option(WITH_GUI "Compile with ImGui." OFF)
+option(WITH_GUI "Compile with ImGui." ON)
 if(WITH_GUI)
     message(STATUS "Generating Makefile with ImGui (to disable GUI, run 'cmake . -DWITH_GUI=OFF')")
     add_definitions(-DUSE_IMGUI=1)
