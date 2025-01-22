@@ -12,7 +12,7 @@ bool Hooks::CreateMove(void* thisptr, float flInputSampleTime, CUserCmd* cmd)
 
     if (cmd && cmd->command_number)
     {
-        *bSendPacket = CreateMove::sendPacket;
+        //*bSendPacket = CreateMove::sendPacket;
         CreateMove::sendPacket = true;
 
         Aimbot::CreateMove(cmd);

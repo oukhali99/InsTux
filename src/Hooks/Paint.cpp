@@ -27,8 +27,9 @@ void Hooks::Paint(void* thisptr, PaintMode_t mode)
     {
         ESP::Paint();
         Radar::Paint();
-        NoFlash::Paint();
+        //NoFlash::Paint();
 
+        /*
         static unsigned counter = 0;
         if (counter < nodraw_materials.size())
         {
@@ -49,5 +50,6 @@ void Hooks::Paint(void* thisptr, PaintMode_t mode)
         }
         counter++;
         counter %= 200;
+        */
     }
 }

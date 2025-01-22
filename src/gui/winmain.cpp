@@ -93,6 +93,8 @@ void WinMain::RenderWindow()
 
 void WinMain::TabAimbotRender()
 {
+    ImGui::Text("Always Disabled (I got banend using this so idk)");
+    Settings::Aimbot::enable = false;
     ImGui::Checkbox("Enable", &Settings::Aimbot::enable);
     if (!Settings::Aimbot::enable)
     {
