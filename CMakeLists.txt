@@ -1,4 +1,9 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
+
+# Set C++ standard flag
+set(CMAKE_CXX_STANDARD 20)
+
+# Project name
 project(InsTux)
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
