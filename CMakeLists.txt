@@ -24,9 +24,22 @@ FUNCTION (EXCLUDE_FILES_FROM_DIR_IN_LIST _InFileList _excludeDirName _verbose)
     set(SOURCE_FILES ${_InFileList} PARENT_SCOPE) # Return the SOURCE_FILES variable to the calling parent
 ENDFUNCTION (EXCLUDE_FILES_FROM_DIR_IN_LIST)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wno-maybe-uninitialized -Wno-unused-result -O3 --no-gnu-unique") #force 32bit compilation
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-libstdc++ --no-gnu-unique")
-set(CMAKE_BUILD_TYPE Release)
+# Print build type
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
+# Common compiler flags
+set(CMAKE_CXX_FLAGS "-m32 -ldl -lpthread -fPIC -fno-gnu-unique -lX11 -lXtst -D__amigaos4__")
+
+# Warnings
+set(CMAKE_CXX_FLAGS "-Wall -Wno-maybe-uninitialized -Wno-unused-result -Wno-format -Wno-class-memaccess -Wno-register")
+
+# Compiler flags for debug build
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -ggdb -Og -O0 -DDEBUG")
+
+# Compiler flags for release build
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -DNDEBUG -O3")
+
+#set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-libstdc++")
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
