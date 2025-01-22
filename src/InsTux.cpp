@@ -8,14 +8,15 @@
 #include "Utils/mousesim.h"
 #include "fonts.h"
 #include "settings.h"
+#include <thread>
 
 #ifdef USE_IMGUI
 #include "gui/itgui.h"
 #endif
 
-// Called on library load
-int __attribute__((constructor)) instux_init()
-{
+std::thread* startThread;
+
+void Start() {
     //InitLogger();
 
     //CreateMaterialFile();
@@ -26,15 +27,15 @@ int __attribute__((constructor)) instux_init()
     Msg("++++ InsTux starting... \n");
 
     Hooker::FindIClientMode();
-    Hooker::FindSendPacket();
+    //Hooker::FindSendPacket();
 
     Hooker::InitializeVMHooks();
 
     modelRenderVMT->HookVM((void*) Hooks::DrawModelExecute, DRAW_MODEL_EXECUTE_IDX);
     modelRenderVMT->ApplyVMT();
 
-    clientModeVMT->HookVM((void*) Hooks::CreateMove, CREATE_MOVE_IDX);
-    clientModeVMT->ApplyVMT();
+    //clientModeVMT->HookVM((void*) Hooks::CreateMove, CREATE_MOVE_IDX);
+    //clientModeVMT->ApplyVMT();
 
     engineVGuiVMT->HookVM((void*) Hooks::Paint, 15);
     engineVGuiVMT->ApplyVMT();
@@ -52,6 +53,12 @@ int __attribute__((constructor)) instux_init()
 #endif
     
     Msg("++++ InsTux loading complete! ++++\n");
+}
+
+// Called on library load
+int __attribute__((constructor)) instux_init()
+{
+    startThread = new std::thread(Start);
     return 0;
 }
 
@@ -61,6 +68,9 @@ void __attribute__((destructor)) instux_shutdown()
 #ifdef USE_IMGUI
     GUI::DeInit();
 #endif
+
+    startThread->join();
+    delete startThread;
 
     MouseSim::mouseDestroy();
     modelRenderVMT->ReleaseVMT();
