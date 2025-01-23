@@ -83,3 +83,6 @@ bool Chams::DrawModelExecute(void* thisptr, void* context, void *state, const Mo
 
     return true;
 }
+
+void Chams::EntitySceneEndHook(void* thisptr, C_BaseEntity* entity) {
+}

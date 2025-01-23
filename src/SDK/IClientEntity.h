@@ -39,6 +39,10 @@ public:
     virtual ~IHandleEntity() {};
 };
 
+struct RenderableInstance_t {
+	uint8_t m_nAlpha;
+};
+
 class IClientUnknown : public IHandleEntity {};
 class IClientRenderable
 {
@@ -49,6 +53,11 @@ public:
     {
         typedef model_t* (* oGetModel)(void*);
         return getvfunc<oGetModel>(this, 8)(this);
+    }
+
+    int	DrawModel(int flags, const RenderableInstance_t& instance) {
+        typedef int (* oDrawModel)(void*, int, const RenderableInstance_t&);
+        return getvfunc<oDrawModel>(this, 9)(this, flags, instance);
     }
 
     bool SetupBones(matrix3x4_t* pBoneMatrix, int nMaxBones, int nBoneMask, float flCurTime = 0)

@@ -9,6 +9,7 @@ uint8_t* CamThinkSvCheatsCheck = nullptr;
 
 VMT* modelRenderVMT = nullptr;
 VMT* clientModeVMT = nullptr;
+VMT* renderViewVMT = nullptr;
 
 VMT* materialVMT = nullptr;
 
@@ -101,6 +102,7 @@ void Hooker::InitializeVMHooks()
     modelRenderVMT = new VMT(modelRender);
     surfaceVMT = new VMT(surface);
     engineVGuiVMT = new VMT(engineVGui);
+    renderViewVMT = new VMT(renderView);
 
     /*
     gameEventsVMT = new VMT(gameEvents);

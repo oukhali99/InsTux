@@ -22,12 +22,14 @@ extern IEngineTrace* trace;
 extern IVModelRender* modelRender;
 extern IMaterialSystem* material;
 extern IVModelInfo* modelInfo;
+extern IVRenderView* renderView;
 
 extern ISurface* surface;
 extern IEngineVGui* engineVGui;
 
 extern VMT* materialVMT;
 extern VMT* modelRenderVMT;
+extern VMT* renderViewVMT;
 extern VMT* clientModeVMT;
 extern VMT* clientVMT;
 

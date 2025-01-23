@@ -35,6 +35,7 @@ IEngineTrace* trace = nullptr;
 IVModelRender* modelRender = nullptr;
 IMaterialSystem* material = nullptr;
 IVModelInfo* modelInfo = nullptr;
+IVRenderView* renderView = nullptr;
 
 ISurface* surface = nullptr;
 IEngineVGui* engineVGui = nullptr;
@@ -101,6 +102,9 @@ void Interfaces::FindInterfaces()
 
     inputSystem = GetInterface<IInputSystem>("./bin/inputsystem.so", "InputSystemVersion");
     checknull(inputSystem, "inputSystem");
+
+    renderView = GetInterface<IVRenderView>("./bin/engine.so", "VEngineRenderView");
+    checknull(renderView, "renderView");
     /*
     panel = GetInterface<IVPanel>("./bin/linux64/vgui2_client.so", "VGUI_Panel");
     inputInternal = GetInterface<IInputInternal>("./bin/linux64/vgui2_client.so", "VGUI_InputInternal");

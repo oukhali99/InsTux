@@ -7,9 +7,11 @@
 
 #define DRAW_MODEL_EXECUTE_IDX 19
 #define CREATE_MOVE_IDX 25
+#define SCENE_END_IDX 9
 
 typedef void (*DrawModelExecuteFn) (void*, void*, void*, const ModelRenderInfo_t&, matrix3x4_t*);
 typedef bool (*CreateMoveFn) (void*, float, CUserCmd*);
+typedef void (*SceneEndFn) (void*);
 
 typedef int (*PaintFn) (void*, PaintMode_t);
 
@@ -17,6 +19,7 @@ namespace Hooks
 {
     void DrawModelExecute(void* thisptr, void* context, void *state, const ModelRenderInfo_t &pInfo, matrix3x4_t* pCustomBoneToWorld);
     bool CreateMove(void* thisptr, float flInputSampleTime, CUserCmd* cmd);
+    void SceneEnd(void* thisptr);
 
     int Paint(void* thisptr, PaintMode_t mode);
 }

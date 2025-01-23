@@ -31,6 +31,9 @@ void Start() {
 
     Hooker::InitializeVMHooks();
 
+    //renderViewVMT->HookVM((void*) Hooks::SceneEnd, SCENE_END_IDX);
+    //renderViewVMT->ApplyVMT();
+
     modelRenderVMT->HookVM((void*) Hooks::DrawModelExecute, DRAW_MODEL_EXECUTE_IDX);
     modelRenderVMT->ApplyVMT();
 
@@ -76,4 +79,5 @@ void __attribute__((destructor)) instux_shutdown()
     modelRenderVMT->ReleaseVMT();
     clientModeVMT->ReleaseVMT();
     engineVGuiVMT->ReleaseVMT();
+    //renderViewVMT->ReleaseVMT();
 }
